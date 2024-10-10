@@ -23,7 +23,7 @@ const VideoList: React.FC = () => {
                 {video.duration}
               </span>
             </button>
-            <VideoOptionsDropdown />
+            <VideoOptionsDropdown videoId={video.id} />
           </div>
         )
       })}

@@ -1,6 +1,7 @@
 'use server'
 
 import { CreateVideo } from '@/api/videos/create-video'
+import { deleteVideo } from '@/api/videos/delete-video'
 import { getAllVideos } from '@/api/videos/get-videos'
 
 export async function createVideoAction(videoUrl: string) {
@@ -22,6 +23,12 @@ export async function createVideoAction(videoUrl: string) {
 
 export async function getAllVideosAction() {
   const response = await getAllVideos()
+
+  return { response, success: true }
+}
+
+export async function deleteVideoAction(id: string) {
+  const response = await deleteVideo({ id })
 
   return { response, success: true }
 }

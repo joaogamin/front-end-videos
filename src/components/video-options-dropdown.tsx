@@ -1,12 +1,5 @@
 'use client'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,6 +8,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import { deleteVideoAction, getAllVideosAction } from '@/server/actions/video'
+import { usePlayerStore } from '@/zustand-store/store'
 import {
   ArrowsClockwise,
   DotsThreeVertical,
@@ -22,10 +26,26 @@ import {
 } from '@phosphor-icons/react/dist/ssr'
 import { useState } from 'react'
 import { Input } from './ui/input'
-const VideoOptionsDropdown: React.FC = () => {
+
+interface VideoOptionsDropdownProps {
+  videoId: string
+}
+
+const VideoOptionsDropdown: React.FC<VideoOptionsDropdownProps> = ({
+  videoId,
+}) => {
   const [openUpdateMenu, setOpenupdateMenu] = useState(false)
   const [openDeleteMenu, setOpenDeleteMenu] = useState(false)
   const [openDropdown, setOpenDropdown] = useState(false)
+
+  const { setVideos } = usePlayerStore()
+
+  const deleteVideo = async () => {
+    await deleteVideoAction(videoId)
+    const newVideos = await getAllVideosAction()
+    return setVideos(newVideos.response.videos)
+  }
+
   return (
     <DropdownMenu open={openDropdown} modal onOpenChange={setOpenDropdown}>
       <DropdownMenuTrigger
@@ -112,6 +132,7 @@ const VideoOptionsDropdown: React.FC = () => {
             <div className="pt-8 flex gap-4">
               <button
                 onClick={() => {
+                  deleteVideo()
                   setOpenDeleteMenu(false)
                   setOpenDropdown(false)
                 }}
@@ -126,4 +147,5 @@ const VideoOptionsDropdown: React.FC = () => {
     </DropdownMenu>
   )
 }
+
 export default VideoOptionsDropdown
