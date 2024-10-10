@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# YouTube URL Manager - Front-end
 
-First, run the development server:
+## Descrição
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Este é o front-end do projeto **YouTube URL Manager**, uma aplicação web para gerenciar URLs de vídeos do YouTube. A aplicação permite inserir, listar, tocar e deletar URLs, sendo desenvolvida utilizando **Next.js** para a interface e **Vercel** para o deploy.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Funcionalidades
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Inserir URL**: Permite ao usuário adicionar uma URL de vídeo do YouTube para a lista.
+- **Listar URLs**: Exibe uma lista de URLs previamente armazenadas.
+- **Tocar vídeo**: Ao clicar na URL, o vídeo é reproduzido diretamente na aplicação.
+- **Deletar URL**: Permite ao usuário remover URLs da lista.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tecnologias Utilizadas
 
-## Learn More
+- **Next.js**: Framework para aplicações React, com renderização no lado do servidor.
+- **Axios**: Biblioteca para fazer requisições HTTP, utilizada para comunicação com o back-end.
+- **Vercel**: Plataforma utilizada para fazer o deploy da aplicação front-end.
+- **Tailwind CSS**: Framework CSS para estilização.
 
-To learn more about Next.js, take a look at the following resources:
+## Requisitos
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Node.js** (v14 ou superior)
+- **Yarn** ou **npm** para gerenciamento de dependências
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Instalação e Configuração
 
-## Deploy on Vercel
+1. Clone o repositório do projeto:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   git clone https://github.com/seu-usuario/seu-repositorio.git
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. Acesse o diretório do projeto:
+
+   ```bash
+   cd seu-repositorio
+   ```
+
+3. Instale as dependências necessárias:
+
+   ```bash
+   yarn install
+   # ou
+   npm install
+   ```
+
+4. Crie o arquivo `.env.local` na raiz do projeto e adicione a seguinte variável de ambiente para configurar o acesso ao back-end:
+
+   ```bash
+   NEXT_PUBLIC_API_URL=https://sua-api-render-url.onrender.com/api
+   ```
+
+   Certifique-se de que a URL da API no Render esteja correta.
+
+## Como Usar a Solução
+
+1. Acesse a aplicação no navegador através do endereço do deploy no Vercel.
+2. Na página principal, você poderá inserir uma URL de um vídeo do YouTube no campo indicado.
+3. Após inserir a URL, clique no botão "Adicionar" para armazenar o vídeo.
+4. A lista de vídeos adicionados aparecerá logo abaixo. Você poderá clicar em qualquer URL para reproduzir o vídeo.
+5. Para remover uma URL da lista, clique no botão "Deletar" ao lado do vídeo correspondente.
+
+## Execução Local
+
+Para rodar o projeto localmente, siga os passos abaixo:
+
+1. Inicie o servidor de desenvolvimento:
+
+  ```bash
+   yarn dev
+   # ou
+   npm run dev
+  ```
+
+2. Acesse a aplicação no navegador através do seguinte endereço:
+
+  ```
+   http://localhost:3000
+  ```
+
+## Deploy
+
+O deploy será realizado na **Vercel**. Siga os passos abaixo para realizar o deploy:
+
+1. Acesse a plataforma Vercel (https://vercel.com) e faça login com sua conta.
+2. Importe o repositório GitHub do projeto para o Vercel.
+3. Siga as instruções da Vercel para configurar o projeto e realizar o deploy.
+4. O projeto estará disponível em uma URL pública gerada pela Vercel.
+
+### Funcionalidades
+
+- **Inserir URL**: Inserção de URLs do YouTube.
+- **Listar URLs**: Exibição de todas as URLs salvas.
+- **Tocar vídeo**: Reproduzir vídeos do YouTube a partir da lista.
+- **Deletar URL**: Remover URLs da lista.
+
+### Observações
+
+- Certifique-se de que o back-end esteja rodando e esteja acessível.
+
+## Sugestões de Melhorias
+
+- **Inserção de vídeos de outros provedores**: Expandir a funcionalidade de inserção de URLs para permitir vídeos de outros provedores além do YouTube.
+- **Autenticação no front-end**: Implementar autenticação para gerenciar diferentes usuários e suas listas de URLs.
+- **Funcionalidade de pesquisa**: Implementar uma funcionalidade de pesquisa para facilitar a busca por URLs.
+
+## Passo a Passo do Deploy
+
+1. Após configurar o projeto na Vercel, você pode adicionar variáveis de ambiente diretamente na plataforma para garantir o correto funcionamento.
+2. O projeto será automaticamente construído e publicado após cada commit feito no repositório GitHub conectado.
+3. Acesse a URL gerada para visualizar o front-end em produção.
