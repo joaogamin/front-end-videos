@@ -14,6 +14,7 @@ const VideoPlayer = () => {
     setVideos,
     isLoading,
     currentVideoIndex,
+    setCurrentVideoIndex,
     videos,
     next,
   } = usePlayerStore()
@@ -26,6 +27,16 @@ const VideoPlayer = () => {
     getAllVideosAction().then(({ response }) => setVideos(response.videos))
     setIsLoading(false)
   }, [])
+
+  useEffect(() => {
+    if (videos.length === 1) return setCurrentVideoIndex(0)
+    const isNewVideo = videos.length > currentVideoIndex + 1
+    if (isNewVideo) {
+      setCurrentVideoIndex(currentVideoIndex)
+    } else {
+      setCurrentVideoIndex(currentVideoIndex - 1)
+    }
+  }, [videos.length])
 
   return (
     <div className="w-full bg-zinc-950 aspect-video">

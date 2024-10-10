@@ -16,6 +16,8 @@ export interface PlayerState {
   setVideos: (videos: Array<Video>) => void
   setIsLoading: (isLoading: boolean) => void
 
+  setCurrentVideoIndex: (currentVideoIndex: number) => void
+
   play: (videoIndex: [number]) => void
   next: () => void
 }
@@ -31,6 +33,10 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
 
   setVideos: (videos: Array<Video>) => {
     set({ videos })
+  },
+
+  setCurrentVideoIndex: (currentVideoIndex: number) => {
+    set({ currentVideoIndex })
   },
 
   play: (currentVideoIndex: [number]) => {

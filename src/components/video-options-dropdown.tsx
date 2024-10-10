@@ -51,7 +51,8 @@ const VideoOptionsDropdown: React.FC<VideoOptionsDropdownProps> = ({
   const [openUpdateMenu, setOpenupdateMenu] = useState(false)
   const [openDeleteMenu, setOpenDeleteMenu] = useState(false)
   const [openDropdown, setOpenDropdown] = useState(false)
-  const { setVideos } = usePlayerStore()
+  const { setVideos, setCurrentVideoIndex, currentVideoIndex, videos } =
+    usePlayerStore()
 
   const {
     register,
@@ -65,7 +66,11 @@ const VideoOptionsDropdown: React.FC<VideoOptionsDropdownProps> = ({
     const { response, success } = await updateVideoAction(videoId, videoUrl)
 
     if (success) {
-      console.log(response.status)
+      if (videos.length !== 0) {
+        setCurrentVideoIndex(currentVideoIndex - 1)
+      } else {
+        setCurrentVideoIndex(0)
+      }
       const newVideos = await getAllVideosAction()
       setVideos(newVideos.response.videos)
     }
