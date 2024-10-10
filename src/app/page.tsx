@@ -1,11 +1,27 @@
 import {
-  DotsThreeVertical,
-  PlusCircle,
   Spinner,
   Video,
 } from '@phosphor-icons/react/dist/ssr'
 
-export default async function Home() {
+import dynamic from 'next/dynamic'
+
+const VideoOptionsDropdown =
+  dynamic(
+    () =>
+      import(
+        '@/components/video-options-dropdown'
+      ),
+  )
+
+const AddVideoDialog =
+  dynamic(
+    () =>
+      import(
+        '@/components/add-video-dialog'
+      ),
+  )
+
+export default async function HomePage() {
   return (
     <div className="h-screen bg-zinc-950 text-zinc-50 flex flex-row-reverse justify-center items-center">
       <div className="flex max-w-[1100px] w-full mx-auto px-5 2xl:px-0 flex-col gap-6">
@@ -23,11 +39,7 @@ export default async function Home() {
             </span>
           </div>
 
-          <button className="flex items-center gap-2 rounded bg-blue-800 px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">
-            <PlusCircle className="w-4 h-4" />
-            Adicionar
-            vídeo
-          </button>
+          <AddVideoDialog />
         </div>
 
         <main className="relative flex flex-col gap-1 md:flex-row overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900 shadow md:pr-80">
@@ -58,9 +70,7 @@ export default async function Home() {
                   03:54
                 </span>
               </button>
-              <button className="pr-2">
-                <DotsThreeVertical className="w-4 h-4 text-zinc-500" />
-              </button>
+              <VideoOptionsDropdown />
             </div>
             <div className="flex items-center flex-row">
               <button className="flex items-center justify-between w-full pl-4 pr-2 py-2 gap-3 text-sm text-zinc-400 data-[active=true]:text-emerald-400 enabled:hover:text-zinc-100">
@@ -76,9 +86,7 @@ export default async function Home() {
                   03:54
                 </span>
               </button>
-              <button className="pr-2">
-                <DotsThreeVertical className="w-4 h-4 text-zinc-500" />
-              </button>
+              <VideoOptionsDropdown />
             </div>
             <div className="flex items-center flex-row">
               <button className="flex items-center justify-between w-full pl-4 pr-2 py-2 gap-3 text-sm text-zinc-400 data-[active=true]:text-emerald-400 enabled:hover:text-zinc-100">
@@ -94,9 +102,7 @@ export default async function Home() {
                   03:54
                 </span>
               </button>
-              <button className="pr-2">
-                <DotsThreeVertical className="w-4 h-4 text-zinc-500" />
-              </button>
+              <VideoOptionsDropdown />
             </div>
           </div>
         </main>
