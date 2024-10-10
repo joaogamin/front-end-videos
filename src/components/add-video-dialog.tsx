@@ -8,7 +8,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { createVideoAction } from '@/server/actions/video'
+import { createVideoAction, getAllVideosAction } from '@/server/actions/video'
+import { usePlayerStore } from '@/zustand-store/store'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PlusCircle } from '@phosphor-icons/react/dist/ssr'
 import { useRouter } from 'next/navigation'
@@ -28,6 +29,8 @@ const AddVideoDialog: React.FC = () => {
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
 
+  const { setVideos } = usePlayerStore()
+
   const {
     register,
     handleSubmit,
@@ -42,6 +45,8 @@ const AddVideoDialog: React.FC = () => {
 
     if (success) {
       setOpen(false)
+      const newVideos = await getAllVideosAction()
+      setVideos(newVideos.response.videos)
       return router.refresh()
     }
 
