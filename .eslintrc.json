@@ -1,18 +1,45 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:prettier/recommended"],
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "rules": {
     "prettier/prettier": [
       "error",
       {
-        "printWidth": 0,
+        "printWidth": 80,
         "tabWidth": 2,
         "singleQuote": true,
         "trailingComma": "all",
         "arrowParens": "always",
         "semi": false,
-        "endOfLine": "auto"
+        "endOfLine": "auto",
+        "insertPragma": false
       }
     ],
-    "semi": ["error", "never"]
-  }
+    "semi": ["error", "never"],
+    "@typescript-eslint/no-empty-interface": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "prettier/prettier": [
+          "error",
+          {
+            "printWidth": 80,
+            "tabWidth": 2,
+            "singleQuote": true,
+            "trailingComma": "all",
+            "arrowParens": "always",
+            "semi": false,
+            "endOfLine": "auto"
+          }
+        ],
+        "semi": ["error", "never"],
+        "@typescript-eslint/no-empty-interface": "off"
+      }
+    }
+  ]
 }
