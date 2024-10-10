@@ -1,22 +1,24 @@
-import { Video as VideoPlayer } from '@/components/video'
 import VideoSkeleton from '@/components/video-skeleton'
 import dynamic from 'next/dynamic'
 
+const VideoInformations = dynamic(
+  () => import('@/components/video-informations'),
+)
+
 const AddVideoDialog = dynamic(() => import('@/components/add-video-dialog'))
 
-const VideoList = dynamic(() => import('@/components/video-list'), {
+const VideoPlayer = dynamic(() => import('@/components/video-player'), {
   loading: () => <VideoSkeleton />,
 })
+
+const VideoList = dynamic(() => import('@/components/video-list'))
 
 export default async function Home() {
   return (
     <div className="h-screen bg-zinc-950 text-zinc-50 flex flex-row-reverse justify-center items-center">
       <div className="flex max-w-[1100px] w-full mx-auto px-5 2xl:px-0 flex-col gap-6">
-        <div className="flex items-center justify-between ">
-          <div className="flex flex-col gap-1">
-            <h1 className="text-2xl font-bold">Título do vídeo</h1>
-            <span className="text-sm text-zinc-400">Módulo do vídeo</span>
-          </div>
+        <div className="flex items-center justify-between gap-8">
+          <VideoInformations />
 
           <AddVideoDialog />
         </div>
