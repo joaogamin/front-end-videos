@@ -1,7 +1,5 @@
-import {
-  Spinner,
-  Video,
-} from '@phosphor-icons/react/dist/ssr'
+import VideoSkeleton from '@/components/video-skeleton'
+import { Video } from '@phosphor-icons/react/dist/ssr'
 
 import dynamic from 'next/dynamic'
 
@@ -19,6 +17,21 @@ const AddVideoDialog =
       import(
         '@/components/add-video-dialog'
       ),
+  )
+
+const VideoPlayer =
+  dynamic(
+    () =>
+      import(
+        '@/components/video'
+      ),
+    {
+      ssr: false,
+      loading:
+        () => (
+          <VideoSkeleton />
+        ),
+    },
   )
 
 export default async function HomePage() {
@@ -44,11 +57,7 @@ export default async function HomePage() {
 
         <main className="relative flex flex-col gap-1 md:flex-row overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900 shadow md:pr-80">
           <div className="md:flex-1">
-            <div className="w-full bg-zinc-950 aspect-video">
-              <div className="flex h-full items-center justify-center">
-                <Spinner className="w-6 h-6 text-zinc-400 animate-spin" />
-              </div>
-            </div>
+            <VideoPlayer />
           </div>
           <div className="md:w-80 w-full divide-y-2 divide-zinc-900 border-l border-zinc-800 bg-zinc-900 md:absolute md:top-2 md:bottom-0 md:right-0 md:overflow-y-scroll scrollbar-thin scrollbar-track-zinc-950 scrollbar-thumb-zinc-900">
             <h2 className="text-zinc-50 text-lg border-b border-zinc-800 px-4 py-2">
