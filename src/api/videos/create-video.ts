@@ -8,7 +8,12 @@ export const createVideoRequestSchema = z.object({
 export type CreateVideoRequest = z.infer<typeof createVideoRequestSchema>
 
 export async function CreateVideo({ id }: CreateVideoRequest) {
-  await api.post('/videos', {
+  const { data, status } = await api.post('/videos', {
     id,
   })
+
+  return {
+    data,
+    status,
+  }
 }

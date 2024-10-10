@@ -1,4 +1,5 @@
 'use client'
+
 import {
   Dialog,
   DialogContent,
@@ -7,11 +8,43 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { createVideoAction } from '@/server/actions/video'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { PlusCircle } from '@phosphor-icons/react/dist/ssr'
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 import { Input } from './ui/input'
+
+const createVideoFormSchema = z.object({
+  videoUrl: z.string().url(),
+})
+
+type CreateVideoFormData = z.infer<typeof createVideoFormSchema>
+
 const AddVideoDialog: React.FC = () => {
   const [open, setOpen] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const {
+    register,
+    handleSubmit,
+
+    formState: { errors, isSubmitting },
+  } = useForm<CreateVideoFormData>({
+    resolver: zodResolver(createVideoFormSchema),
+  })
+
+  async function handleCreateVideo({ videoUrl }: CreateVideoFormData) {
+    const { response, success } = await createVideoAction(videoUrl)
+
+    if (success) {
+      return setOpen(false)
+    }
+
+    setError(response.data?.message || 'Ocorreu um erro inesperado.')
+  }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -28,21 +61,37 @@ const AddVideoDialog: React.FC = () => {
             lista. Insira o link do vídeo desejado e clique no botão Adicionar.
           </DialogDescription>
         </DialogHeader>
-        <div className="pb-4 flex flex-row gap-4">
-          <Input
-            placeholder="Insira a URL do seu vídeo aqui."
-            className="bg-zinc-900"
-          />
+        <form
+          className="pb-4 flex flex-row gap-4"
+          onSubmit={handleSubmit(handleCreateVideo)}
+        >
+          <div className="flex flex-col gap-1 w-full">
+            <Input
+              placeholder="Insira a URL do seu vídeo aqui."
+              className="bg-zinc-900"
+              type="url"
+              {...register('videoUrl')}
+            />
+            {errors.videoUrl && (
+              <span className="text-red-500 text-sm">
+                {errors.videoUrl.message}
+              </span>
+            )}
+
+            {error && <span className="text-red-500 text-sm">{error}</span>}
+          </div>
           <button
-            onClick={() => setOpen(false)}
-            className="flex items-center gap-2 rounded bg-blue-900 px-3 py-2 text-sm font-medium text-white hover:bg-blue-950"
+            type="submit"
+            disabled={isSubmitting}
+            className="flex items-center gap-2 rounded bg-blue-900 px-3 py-2 text-sm font-medium text-white hover:bg-blue-950 max-h-10 self-start h-full"
           >
             <PlusCircle className="w-4 h-4" />
             Adicionar
           </button>
-        </div>
+        </form>
       </DialogContent>
     </Dialog>
   )
 }
+
 export default AddVideoDialog
