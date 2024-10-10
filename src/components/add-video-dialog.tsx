@@ -60,7 +60,7 @@ const AddVideoDialog: React.FC = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button className="flex items-center gap-2 rounded bg-blue-900 px-3 py-2 text-sm font-medium text-white hover:bg-blue-950">
+        <button className="flex items-center gap-2 rounded bg-blue-900 max-w-40 self-center w-full px-3 py-2 text-sm font-medium text-white hover:bg-blue-950">
           <PlusCircle className="w-4 h-4" />
           Adicionar vídeo
         </button>
