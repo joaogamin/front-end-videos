@@ -11,6 +11,7 @@ import {
 import { createVideoAction } from '@/server/actions/video'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PlusCircle } from '@phosphor-icons/react/dist/ssr'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -25,6 +26,7 @@ type CreateVideoFormData = z.infer<typeof createVideoFormSchema>
 const AddVideoDialog: React.FC = () => {
   const [open, setOpen] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const router = useRouter()
 
   const {
     register,
@@ -39,10 +41,15 @@ const AddVideoDialog: React.FC = () => {
     const { response, success } = await createVideoAction(videoUrl)
 
     if (success) {
-      return setOpen(false)
+      setOpen(false)
+      return router.refresh()
     }
 
     setError(response.data?.message || 'Ocorreu um erro inesperado.')
+
+    await new Promise((resolve) => setTimeout(resolve, 3000))
+
+    setError(null)
   }
 
   return (
