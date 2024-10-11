@@ -30,13 +30,13 @@ Este é o front-end do projeto **YouTube URL Manager**, uma aplicação web para
 1. Clone o repositório do projeto:
 
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   git clone https://github.com/joaogamin/front-end-videos.git
    ```
 
 2. Acesse o diretório do projeto:
 
    ```bash
-   cd seu-repositorio
+   cd front-end-videos
    ```
 
 3. Instale as dependências necessárias:
