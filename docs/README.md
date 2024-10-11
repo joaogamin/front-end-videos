@@ -78,3 +78,4 @@ O deploy será realizado na **Vercel**. Acesse o documento de instrução
 - **Cadastro de usuário**: Uma possível melhoria seria implementar a autenticação de usuário, assim cada usuário teria seus vídeos listados.
 - **Git Flow**: Seguir um processo adequadode GitFlow para um futuro trabalho em equipe.
 - **Vídeo de outros provedores**: A aplicação poderia ter a opção de inserir vídeos de outros provedores além do YouTube.
+- **Testes**: Implementar testes automatizados (unitários, integração e e2e) para maior consistência e confiabilidade no código.
