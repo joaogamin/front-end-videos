@@ -3,7 +3,7 @@
 
 ## Descrição
 
-Este é o front-end do projeto **YouTube URL Manager**, uma aplicação web para gerenciar URLs de vídeos do YouTube. A aplicação permite inserir, listar, tocar, atualizar e deletar URLs, sendo desenvolvida utilizando **Next.js** para a interface e **Vercel** para o deploy.
+Esta é a solução front-end do desafio, uma aplicação web para gerenciar URLs de vídeos do YouTube. A aplicação permite inserir, listar, tocar, atualizar e deletar URLs, sendo desenvolvida utilizando **Next.js** para a interface e **Vercel** para o deploy.
 
 ## Funcionalidades
 
