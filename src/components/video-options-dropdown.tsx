@@ -63,19 +63,19 @@ const VideoOptionsDropdown: React.FC<VideoOptionsDropdownProps> = ({
   })
 
   async function handleUpdateVideo({ videoUrl }: UpdateVideoFormData) {
-    const { response, success } = await updateVideoAction(videoId, videoUrl)
+    const { data, success } = await updateVideoAction(videoId, videoUrl)
 
     if (success) {
       if (videos.length !== 0) {
-        setCurrentVideoIndex(currentVideoIndex - 1)
+        setCurrentVideoIndex(currentVideoIndex)
       } else {
         setCurrentVideoIndex(0)
       }
       const newVideos = await getAllVideosAction()
-      setVideos(newVideos.response.videos)
+      return setVideos(newVideos.response.videos)
     }
 
-    setError(response.data?.message || 'Ocorreu um erro inesperado.')
+    setError(data?.message || 'Ocorreu um erro inesperado.')
 
     await new Promise((resolve) => setTimeout(resolve, 3000))
 

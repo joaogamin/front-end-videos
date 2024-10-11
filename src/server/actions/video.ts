@@ -31,7 +31,7 @@ export async function deleteVideoAction(id: string) {
 
 export async function updateVideoAction(videoId: string, newVideoUrl: string) {
   const newVideoId = getVideoIdByUrl(newVideoUrl)
-  const response = await UpdateVideo({ videoId, newVideoId })
+  const { data, status } = await UpdateVideo({ videoId, newVideoId })
 
-  return { response, success: true }
+  return { data, success: status == 200 }
 }

@@ -34,7 +34,7 @@ const VideoPlayer = () => {
     if (isNewVideo) {
       setCurrentVideoIndex(currentVideoIndex)
     } else {
-      setCurrentVideoIndex(currentVideoIndex - 1)
+      setCurrentVideoIndex(Math.max(0, currentVideoIndex - 1))
     }
   }, [videos.length])
 
